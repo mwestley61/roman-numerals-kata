@@ -14,26 +14,44 @@ namespace RomanNumeralsKataTests
         }
 
         [Fact]
-        public void passingOneReturns_I()
+        public void returns_nulla()
         {
-            var numeral = _kata.getRomanNumeral(1);
+            var numeral = _kata.GetRomanNumeral(0);
 
-            Assert.Equal("I", numeral);
+            Assert.Equal("Nulla", numeral);
+        }
+
+        [Theory]
+        [InlineData(1)]
+        [InlineData(2)]
+        [InlineData(3)]
+        public void returns_one_to_three_letter_Is(int number)
+        {
+            var numeral = _kata.GetRomanNumeral(number);
+
+            Assert.Contains("I", numeral);
+            Assert.True(numeral.Length == number);
         }
 
         [Fact]
-        public void passingTwoReturns_II()
+        public void returns_V()
         {
-            var numeral = _kata.getRomanNumeral(2);
+            var numeral = _kata.GetRomanNumeral(5);
 
-            Assert.Equal("II", numeral);
+            Assert.Equal("V", numeral);
         }
-        [Fact]
-        public void passingThreeReturns_III()
-        {
-            var numeral = _kata.getRomanNumeral(3);
 
-            Assert.Equal("III", numeral);
+        [Theory]
+        [InlineData(10)]
+        [InlineData(20)]
+        [InlineData(30)]
+        public void returns_one_to_three_letter_Xs(int number)
+        {
+            var numeral = _kata.GetRomanNumeral(number);
+
+            Assert.Contains("X", numeral);
+            Assert.True(numeral.Length == number/10);
         }
     }
+
 }

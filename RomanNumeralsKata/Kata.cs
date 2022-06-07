@@ -4,20 +4,33 @@ namespace RomanNumeralsKata
 {
     public class Kata
     {
-        public object getRomanNumeral(int number)
+        public string GetRomanNumeral(int number)
         {
-            if (number == 1)
+            var numeral="";
+            var replacementChar = "I"; 
+ 
+            if (number == 0)
             {
-                return "I";
+                return "Nulla";
             }
-            else
+
+            if (number >= 10)
             {
-                if (number == 2)
+                number = Math.DivRem(number, 10, out int remainder);
+                replacementChar = "X";
+            }
+
+            if (number > 0 && number < 4)
+                for (int i = 0; i < number; i++)
                 {
-                    return "II";
+                    numeral +=replacementChar;
                 }
-            }  
-            return "III";
+            else if (number == 5)
+            {
+                return "V";
+            }
+
+            return numeral;
         }
     }
 }

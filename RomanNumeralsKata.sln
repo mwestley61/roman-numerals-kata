@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32328.378
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RomanNumeralsKataTests", "RomanNumeralsKataTests.csproj", "{C453C1A0-60E4-41D9-A48F-7FFF2A211F92}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RomanNumeralsKataTests", "RomanNumeralsKataTests\RomanNumeralsKataTests.csproj", "{C453C1A0-60E4-41D9-A48F-7FFF2A211F92}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RomanNumeralsKata", "..\RomanNumeralsKata\RomanNumeralsKata.csproj", "{5B02EBCB-8CC4-4255-8F9B-8A67770654A1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RomanNumeralsKata", "RomanNumeralsKata\RomanNumeralsKata.csproj", "{5B02EBCB-8CC4-4255-8F9B-8A67770654A1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
