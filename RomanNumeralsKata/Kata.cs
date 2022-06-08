@@ -14,10 +14,6 @@ namespace RomanNumeralsKata
             {
                 return "Nulla";
             }
-            if (number == 5)
-            {
-                return "V";
-            }
 
             if (number >= 1000)
             { 
@@ -26,22 +22,46 @@ namespace RomanNumeralsKata
             }
             else
             {
-                if (number >= 100)
+                if (number >= 500)
                 {
-                    replacementChar = "C";
-                    divisor = 100;
-                } 
+                    replacementChar = "D";
+                    divisor = 500;
+                }
                 else
                 {
-                    if (number >= 10)
+                    if (number >= 100)
                     {
-                        replacementChar = "X";
-                        divisor = 10;
+                        replacementChar = "C";
+                        divisor = 100;
                     }
                     else
                     {
-                        replacementChar = "I";
-                        divisor = 1;
+                        if (number >= 50)
+                        {
+                            replacementChar = "L";
+                            divisor = 50;
+                        }
+                        else
+                        {
+                            if (number >= 10)
+                            {
+                                replacementChar = "X";
+                                divisor = 10;
+                            }
+                            else
+                            {
+                                if (number >= 5)
+                                {
+                                    replacementChar = "V";
+                                    divisor = 5;
+                                }
+                                else
+                                {
+                                    replacementChar = "I";
+                                    divisor = 1;
+                                }
+                            }
+                        }
                     }
                 }
             }

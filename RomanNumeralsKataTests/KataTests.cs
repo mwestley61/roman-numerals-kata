@@ -53,6 +53,14 @@ namespace RomanNumeralsKataTests
             Assert.True(numeral.Length == number/10);
         }
 
+        [Fact]
+        public void returns_L()
+        {
+            var numeral = _kata.GetRomanNumeral(50);
+
+            Assert.Equal("L", numeral);
+        }
+
         [Theory]
         [InlineData(100)]
         [InlineData(200)]
@@ -63,6 +71,14 @@ namespace RomanNumeralsKataTests
 
             Assert.Contains("C", numeral);
             Assert.True(numeral.Length == number / 100);
+        }
+
+        [Fact]
+        public void returns_D()
+        {
+            var numeral = _kata.GetRomanNumeral(500);
+
+            Assert.Equal("D", numeral);
         }
 
         [Theory]
