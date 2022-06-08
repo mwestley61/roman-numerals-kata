@@ -52,6 +52,30 @@ namespace RomanNumeralsKataTests
             Assert.Contains("X", numeral);
             Assert.True(numeral.Length == number/10);
         }
+
+        [Theory]
+        [InlineData(100)]
+        [InlineData(200)]
+        [InlineData(300)]
+        public void returns_one_to_three_letter_Cs(int number)
+        {
+            var numeral = _kata.GetRomanNumeral(number);
+
+            Assert.Contains("C", numeral);
+            Assert.True(numeral.Length == number / 100);
+        }
+
+        [Theory]
+        [InlineData(1000)]
+        [InlineData(2000)]
+        [InlineData(3000)]
+        public void returns_one_to_three_letter_Ms(int number)
+        {
+            var numeral = _kata.GetRomanNumeral(number);
+
+            Assert.Contains("M", numeral);
+            Assert.True(numeral.Length == number / 1000);
+        }
     }
 
 }
