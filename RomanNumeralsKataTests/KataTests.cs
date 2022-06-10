@@ -1,16 +1,24 @@
-﻿using RomanNumeralsKata;
+﻿using System;
+using System.IO;
+using RomanNumeralsKata;
 using System.Runtime.InteropServices;
+using System.Text;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace RomanNumeralsKataTests
 {
     public class KataTests
     {
         private readonly Kata _kata;
+        private readonly ITestOutputHelper _testOutputHelper;
 
-        public KataTests()
+        public KataTests(ITestOutputHelper testOutputHelper)
         {
-            _kata = new Kata();
+            _kata = new Kata(); 
+            _testOutputHelper = testOutputHelper;
+            var converter = new Converter(_testOutputHelper);
+            Console.SetOut(converter);
         }
 
         [Fact]
@@ -34,6 +42,14 @@ namespace RomanNumeralsKataTests
         }
 
         [Fact]
+        public void returns_V_minusI()
+        {
+            var numeral = _kata.GetRomanNumeral(4);
+
+            Assert.Equal("IV", numeral);
+        }
+
+        [Fact]
         public void returns_V()
         {
             var numeral = _kata.GetRomanNumeral(5);
@@ -54,6 +70,14 @@ namespace RomanNumeralsKataTests
         }
 
         [Fact]
+        public void returns_X_minusL()
+        {
+            var numeral = _kata.GetRomanNumeral(40);
+
+            Assert.Equal("XL", numeral);
+        }
+        
+        [Fact]
         public void returns_L()
         {
             var numeral = _kata.GetRomanNumeral(50);
@@ -71,6 +95,14 @@ namespace RomanNumeralsKataTests
 
             Assert.Contains("C", numeral);
             Assert.True(numeral.Length == number / 100);
+        }
+
+        [Fact]
+        public void returns_C_minusD()
+        {
+            var numeral = _kata.GetRomanNumeral(400);
+
+            Assert.Equal("CD", numeral);
         }
 
         [Fact]
@@ -93,5 +125,29 @@ namespace RomanNumeralsKataTests
             Assert.True(numeral.Length == number / 1000);
         }
     }
+        public class Converter : TextWriter
+        {   
+        ITestOutputHelper _output;
+        public Converter(ITestOutputHelper output)
+        {
+            _output = output;
+        }
+        public override Encoding Encoding
+        {
+            get { return Encoding.UTF8; }
+        }
+        public override void WriteLine(string message)
+        {
+            _output.WriteLine(message);
+        }
+        public override void WriteLine(string format, params object[] args)
+        {
+            _output.WriteLine(format, args);
+        }
 
+        public override void Write(char value)
+        {
+            throw new NotSupportedException("This text writer only supports WriteLine(string) and WriteLine(string, params object[]).");
+        }
+    }
 }
