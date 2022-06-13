@@ -57,6 +57,14 @@ namespace RomanNumeralsKataTests
             Assert.Equal("V", numeral);
         }
 
+        [Fact]
+        public void returns_X_minusI()
+        {
+            var numeral = _kata.GetRomanNumeral(9);
+
+            Assert.Equal("IX", numeral);
+        }
+
         [Theory]
         [InlineData(10)]
         [InlineData(20)]

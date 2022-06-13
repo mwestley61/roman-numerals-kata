@@ -16,12 +16,12 @@ namespace RomanNumeralsKata
             {500,"D"},
             {1000,"M"}
         };
+        string shiftChar = "";
 
         public string GetRomanNumeral(int number)
         {
             var numeral ="";
             var replacementChar = "";
-            var replacementIndex = 0;
             var divisor = 0;
 
             for (int i = romanNumerals.Count - 1; i > -1; i--) // iterate descending from end of list
@@ -29,39 +29,50 @@ namespace RomanNumeralsKata
                 if (number >= romanNumerals.Keys[i])
                 {
                     replacementChar = romanNumerals.Values[i];
-                    replacementIndex = i;
                     divisor = romanNumerals.Keys[i];
                     i = -1;
                 }
             }
 
-            numeral = RepeatReplacementChar(DetermineCharMultiplier(number, divisor), replacementChar, replacementIndex);
+            numeral = RepeatReplacementChar(DetermineCharMultiplier(number, divisor), replacementChar);
 
             return numeral;
         }
 
         private static int DetermineCharMultiplier(int number, int divisor)
         {
-            int charMultiplier = divisor > 0 ? Math.DivRem(number, divisor, out int remainder): 1;
+            int remainder = 0;
+            int charMultiplier = divisor > 0 ? Math.DivRem(number, divisor, out remainder) : 1;
+            Console.WriteLine("Number=" + number + " Divisor=" + divisor + " Remainder=" + remainder);
+            if (remainder == 4)
+            {
+                charMultiplier = 0;
+            }
 
             return charMultiplier;
         }
 
-        private static string RepeatReplacementChar(int charMultiplier, string replacementChar, int replacementIndex)
+        private static string RepeatReplacementChar(int charMultiplier, string replacementChar)
         {
             string numeral = "";
             
             if (charMultiplier > 3)
             {
-                // look up current key in romanNumerals using replacementIndex
-                int index = romanNumerals.IndexOfValue(replacementChar);
-                // retrieve the next higher numeral from romanNumerals table
-                var nextHigherKey = romanNumerals.Values[index+1];
-                // set numeral to replacementChar appended with next higher numeral
+                // set numeral to replacementChar and append with the next higher numeral
                 numeral = replacementChar;
-                replacementChar = nextHigherKey;
+                replacementChar = romanNumerals.Values[romanNumerals.IndexOfValue(replacementChar) + 1];
                 charMultiplier = 1;
             }
+            else
+            {
+                if (charMultiplier == 0)
+                {
+                    numeral = romanNumerals.Values[romanNumerals.IndexOfValue(replacementChar) - 1];
+                    replacementChar = romanNumerals.Values[romanNumerals.IndexOfValue(replacementChar) + 1];
+                    charMultiplier = 1;
+                }
+            }
+
             for (int i = 0; i < charMultiplier; i++)
             {
                 numeral += replacementChar;
