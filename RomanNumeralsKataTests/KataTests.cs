@@ -42,7 +42,7 @@ namespace RomanNumeralsKataTests
         }
 
         [Fact]
-        public void returns_V_minusI()
+        public void returns_V_minus_I()
         {
             var numeral = _kata.GetRomanNumeral(4);
 
@@ -57,8 +57,20 @@ namespace RomanNumeralsKataTests
             Assert.Equal("V", numeral);
         }
 
+        [Theory]
+        [InlineData(6)]
+        [InlineData(7)]
+        [InlineData(8)]
+        public void returns_V_plus_one_to_three_letter_Is(int number)
+        {
+            var numeral = _kata.GetRomanNumeral(number);
+
+            Assert.Equal("V", numeral.Substring(0,1));
+            Assert.True(numeral.Length == number-5+1);
+        }
+
         [Fact]
-        public void returns_X_minusI()
+        public void returns_X_minus_I()
         {
             var numeral = _kata.GetRomanNumeral(9);
 
@@ -77,8 +89,20 @@ namespace RomanNumeralsKataTests
             Assert.True(numeral.Length == number/10);
         }
 
+        [Theory]
+        [InlineData(11)]
+        [InlineData(12)]
+        [InlineData(13)]
+        public void returns_X_plus_one_to_three_letter_Is(int number)
+        {
+            var numeral = _kata.GetRomanNumeral(number);
+
+            Assert.Equal("X", numeral.Substring(0, 1));
+            Assert.True(numeral.Length == number - 10 + 1);
+        }
+
         [Fact]
-        public void returns_X_minusL()
+        public void returns_L_minus_X()
         {
             var numeral = _kata.GetRomanNumeral(40);
 
@@ -94,6 +118,26 @@ namespace RomanNumeralsKataTests
         }
 
         [Theory]
+        [InlineData(51)]
+        [InlineData(52)]
+        [InlineData(53)]
+        public void returns_L_plus_one_to_three_letter_Is(int number)
+        {
+            var numeral = _kata.GetRomanNumeral(number);
+
+            Assert.Equal("L", numeral.Substring(0, 1));
+            Assert.True(numeral.Length == number - 50 + 1);
+        }
+
+        [Fact]
+        public void returns_C_minus_X()
+        {
+            var numeral = _kata.GetRomanNumeral(90);
+
+            Assert.Equal("XC", numeral);
+        }
+
+        [Theory]
         [InlineData(100)]
         [InlineData(200)]
         [InlineData(300)]
@@ -105,8 +149,20 @@ namespace RomanNumeralsKataTests
             Assert.True(numeral.Length == number / 100);
         }
 
+        [Theory]
+        [InlineData(101)]
+        [InlineData(102)]
+        [InlineData(103)]
+        public void returns_C_plus_one_to_three_letter_Is(int number)
+        {
+            var numeral = _kata.GetRomanNumeral(number);
+
+            Assert.Equal("C", numeral.Substring(0, 1));
+            Assert.True(numeral.Length == number - 100 + 1);
+        }
+
         [Fact]
-        public void returns_C_minusD()
+        public void returns_D_minus_C()
         {
             var numeral = _kata.GetRomanNumeral(400);
 
@@ -122,6 +178,26 @@ namespace RomanNumeralsKataTests
         }
 
         [Theory]
+        [InlineData(501)]
+        [InlineData(502)]
+        [InlineData(503)]
+        public void returns_D_plus_one_to_three_letter_Is(int number)
+        {
+            var numeral = _kata.GetRomanNumeral(number);
+
+            Assert.Equal("D", numeral.Substring(0, 1));
+            Assert.True(numeral.Length == number - 500 + 1);
+        }
+
+        [Fact]
+        public void returns_M_minus_C()
+        {
+            var numeral = _kata.GetRomanNumeral(900);
+
+            Assert.Equal("CM", numeral);
+        }
+
+        [Theory]
         [InlineData(1000)]
         [InlineData(2000)]
         [InlineData(3000)]
@@ -132,8 +208,20 @@ namespace RomanNumeralsKataTests
             Assert.Contains("M", numeral);
             Assert.True(numeral.Length == number / 1000);
         }
+
+        [Theory]
+        [InlineData(1001)]
+        [InlineData(1002)]
+        [InlineData(1003)]
+        public void returns_M_plus_one_to_three_letter_Is(int number)
+        {
+            var numeral = _kata.GetRomanNumeral(number);
+
+            Assert.Equal("M", numeral.Substring(0, 1));
+            Assert.True(numeral.Length == number - 1000 + 1);
+        }
     }
-        public class Converter : TextWriter
+    public class Converter : TextWriter
         {   
         ITestOutputHelper _output;
         public Converter(ITestOutputHelper output)

@@ -16,7 +16,6 @@ namespace RomanNumeralsKata
             {500,"D"},
             {1000,"M"}
         };
-        string shiftChar = "";
 
         public string GetRomanNumeral(int number)
         {
@@ -38,18 +37,14 @@ namespace RomanNumeralsKata
             int remainder = 0;
             int charMultiplier = divisor > 0 ? Math.DivRem(number, divisor, out remainder) : 1;
             Console.WriteLine("Number=" + number + " Divisor=" + divisor + " Remainder=" + remainder);
-            if (remainder == 4)
-            {
-                charMultiplier = 0;
-            }
-            string numeral = RepeatReplacementChar(charMultiplier, replacementChar);
-            return numeral;
+
+            return NumeralWithAnyAdjustmentsToReplacementChar(charMultiplier, replacementChar, remainder);
         }
 
-        private static string RepeatReplacementChar(int charMultiplier, string replacementChar)
+        private static string NumeralWithAnyAdjustmentsToReplacementChar(int charMultiplier, string replacementChar, int remainder)
         {
             string numeral = "";
-            
+
             if (charMultiplier > 3)
             {
                 // set numeral to replacementChar and append with the next higher numeral
@@ -57,16 +52,28 @@ namespace RomanNumeralsKata
                 replacementChar = romanNumerals.Values[romanNumerals.IndexOfValue(replacementChar) + 1];
                 charMultiplier = 1;
             }
+
+            if (remainder > 3)
+            {
+                numeral = romanNumerals.Values[romanNumerals.IndexOfValue(replacementChar) - 1];
+                replacementChar = romanNumerals.Values[romanNumerals.IndexOfValue(replacementChar) + 1];
+                charMultiplier = 1;
+            }
             else
             {
-                if (charMultiplier == 0)
+                if (remainder > 0)
                 {
-                    numeral = romanNumerals.Values[romanNumerals.IndexOfValue(replacementChar) - 1];
-                    replacementChar = romanNumerals.Values[romanNumerals.IndexOfValue(replacementChar) + 1];
-                    charMultiplier = 1;
+                    numeral = replacementChar;
+                    replacementChar = "I";
+                    charMultiplier = remainder;
                 }
             }
 
+            return NumeralAffectedByCharMultiplier(charMultiplier, replacementChar, numeral);
+        }
+
+        private static string NumeralAffectedByCharMultiplier(int charMultiplier, string replacementChar, string numeral)
+        {
             for (int i = 0; i < charMultiplier; i++)
             {
                 numeral += replacementChar;
