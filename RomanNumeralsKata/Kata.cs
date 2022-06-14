@@ -21,25 +21,19 @@ namespace RomanNumeralsKata
         public string GetRomanNumeral(int number)
         {
             var numeral ="";
-            var replacementChar = "";
-            var divisor = 0;
 
             for (int i = romanNumerals.Count - 1; i > -1; i--) // iterate descending from end of list
             {
                 if (number >= romanNumerals.Keys[i])
                 {
-                    replacementChar = romanNumerals.Values[i];
-                    divisor = romanNumerals.Keys[i];
-                    i = -1;
+                    return ConvertNumberToRomanNumeral(number, romanNumerals.Keys[i], romanNumerals.Values[i]);
                 }
             }
-
-            numeral = RepeatReplacementChar(DetermineCharMultiplier(number, divisor), replacementChar);
 
             return numeral;
         }
 
-        private static int DetermineCharMultiplier(int number, int divisor)
+        private static string ConvertNumberToRomanNumeral(int number, int divisor, string replacementChar)
         {
             int remainder = 0;
             int charMultiplier = divisor > 0 ? Math.DivRem(number, divisor, out remainder) : 1;
@@ -48,8 +42,8 @@ namespace RomanNumeralsKata
             {
                 charMultiplier = 0;
             }
-
-            return charMultiplier;
+            string numeral = RepeatReplacementChar(charMultiplier, replacementChar);
+            return numeral;
         }
 
         private static string RepeatReplacementChar(int charMultiplier, string replacementChar)
