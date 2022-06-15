@@ -64,9 +64,10 @@ namespace RomanNumeralsKataTests
         public void returns_V_plus_one_to_three_letter_Is(int number)
         {
             var numeral = _kata.GetRomanNumeral(number);
+            var numberOfIs = number - 5;
 
-            Assert.Equal("V", numeral.Substring(0,1));
-            Assert.True(numeral.Length == number-5+1);
+            Assert.StartsWith("V", numeral);
+            Assert.EndsWith(new string('I', numberOfIs), numeral);
         }
 
         [Fact]
@@ -96,9 +97,10 @@ namespace RomanNumeralsKataTests
         public void returns_X_plus_one_to_three_letter_Is(int number)
         {
             var numeral = _kata.GetRomanNumeral(number);
+            var numberOfIs = number - 10;
 
-            Assert.Equal("X", numeral.Substring(0, 1));
-            Assert.True(numeral.Length == number - 10 + 1);
+            Assert.StartsWith("X", numeral);
+            Assert.EndsWith(new string('I', numberOfIs), numeral);
         }
 
         [Fact]
@@ -124,9 +126,10 @@ namespace RomanNumeralsKataTests
         public void returns_L_plus_one_to_three_letter_Is(int number)
         {
             var numeral = _kata.GetRomanNumeral(number);
+            var numberOfIs = number - 50;
 
-            Assert.Equal("L", numeral.Substring(0, 1));
-            Assert.True(numeral.Length == number - 50 + 1);
+            Assert.StartsWith("L", numeral);
+            Assert.EndsWith(new string('I', numberOfIs), numeral);
         }
 
         [Fact]
@@ -156,9 +159,10 @@ namespace RomanNumeralsKataTests
         public void returns_C_plus_one_to_three_letter_Is(int number)
         {
             var numeral = _kata.GetRomanNumeral(number);
+            var numberOfIs = number - 100;
 
-            Assert.Equal("C", numeral.Substring(0, 1));
-            Assert.True(numeral.Length == number - 100 + 1);
+            Assert.StartsWith("C", numeral);
+            Assert.EndsWith(new string('I', numberOfIs), numeral);
         }
 
         [Fact]
@@ -184,9 +188,10 @@ namespace RomanNumeralsKataTests
         public void returns_D_plus_one_to_three_letter_Is(int number)
         {
             var numeral = _kata.GetRomanNumeral(number);
+            var numberOfIs = number - 500;
 
-            Assert.Equal("D", numeral.Substring(0, 1));
-            Assert.True(numeral.Length == number - 500 + 1);
+            Assert.StartsWith("D", numeral);
+            Assert.EndsWith(new string('I', numberOfIs), numeral);
         }
 
         [Fact]
@@ -216,9 +221,10 @@ namespace RomanNumeralsKataTests
         public void returns_M_plus_one_to_three_letter_Is(int number)
         {
             var numeral = _kata.GetRomanNumeral(number);
+            var numberOfIs = number - 1000;
 
-            Assert.Equal("M", numeral.Substring(0, 1));
-            Assert.True(numeral.Length == number - 1000 + 1);
+            Assert.StartsWith("M", numeral);
+            Assert.EndsWith(new string('I', numberOfIs), numeral);
         }
     }
     public class Converter : TextWriter

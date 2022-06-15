@@ -47,7 +47,6 @@ namespace RomanNumeralsKata
 
             if (charMultiplier > 3)
             {
-                // set numeral to replacementChar and append with the next higher numeral
                 numeral = replacementChar;
                 replacementChar = romanNumerals.Values[romanNumerals.IndexOfValue(replacementChar) + 1];
                 charMultiplier = 1;
