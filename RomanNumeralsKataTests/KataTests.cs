@@ -104,6 +104,14 @@ namespace RomanNumeralsKataTests
         }
 
         [Fact]
+        public void returns_X_plus_IV()
+        {
+            var numeral = _kata.GetRomanNumeral(14);
+
+            Assert.Equal("XIV", numeral);
+        }
+
+        [Fact]
         public void returns_X_plus_V()
         {
             var numeral = _kata.GetRomanNumeral(15);
@@ -138,6 +146,14 @@ namespace RomanNumeralsKataTests
 
             Assert.StartsWith("L", numeral);
             Assert.EndsWith(new string('I', numberOfIs), numeral);
+        }
+
+        [Fact]
+        public void returns_L_plus_IV()
+        {
+            var numeral = _kata.GetRomanNumeral(54);
+
+            Assert.Equal("LIV", numeral);
         }
 
         [Fact]
@@ -182,6 +198,14 @@ namespace RomanNumeralsKataTests
         }
 
         [Fact]
+        public void returns_C_plus_IV()
+        {
+            var numeral = _kata.GetRomanNumeral(104);
+
+            Assert.Equal("CIV", numeral);
+        }
+
+        [Fact]
         public void returns_C_plus_V()
         {
             var numeral = _kata.GetRomanNumeral(105);
@@ -216,6 +240,14 @@ namespace RomanNumeralsKataTests
 
             Assert.StartsWith("D", numeral);
             Assert.EndsWith(new string('I', numberOfIs), numeral);
+        }
+
+        [Fact]
+        public void returns_D_plus_IV()
+        {
+            var numeral = _kata.GetRomanNumeral(504);
+
+            Assert.Equal("DIV", numeral);
         }
 
         [Fact]
@@ -257,6 +289,14 @@ namespace RomanNumeralsKataTests
 
             Assert.StartsWith("M", numeral);
             Assert.EndsWith(new string('I', numberOfIs), numeral);
+        }
+
+        [Fact]
+        public void returns_M_plus_IV()
+        {
+            var numeral = _kata.GetRomanNumeral(1004);
+
+            Assert.Equal("MIV", numeral);
         }
 
         [Fact]

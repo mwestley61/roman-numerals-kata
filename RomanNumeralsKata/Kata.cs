@@ -35,13 +35,15 @@ namespace RomanNumeralsKata
         private static string ConvertNumberToRomanNumeral(int number, int divisor, string replacementChar)
         {
             int remainder = 0;
-            int charMultiplier = divisor > 0 ? Math.DivRem(number, divisor, out remainder) : 1;
+            int charMultiplier = DetermineCharMultiplier(number, divisor, ref remainder);
             Console.WriteLine("Number=" + number + " Divisor=" + divisor + " Remainder=" + remainder);
 
-            return NumeralWithAnyAdjustmentsToReplacementChar(charMultiplier, replacementChar, remainder);
+            string numeral = NumeralWithAnyAdjustmentsToReplacementChar(charMultiplier, replacementChar, number, divisor, remainder);
+            Console.WriteLine(" Converted To = " + numeral);
+            return numeral;
         }
 
-        private static string NumeralWithAnyAdjustmentsToReplacementChar(int charMultiplier, string replacementChar, int remainder)
+        private static string NumeralWithAnyAdjustmentsToReplacementChar(int charMultiplier, string replacementChar, int number, int divisor ,int remainder)
         {
             string numeral = "";
 
@@ -55,9 +57,20 @@ namespace RomanNumeralsKata
             {
                 if (IsMultipleOf4(remainder))
                 {
-                    numeral = romanNumerals.Values[romanNumerals.IndexOfValue(replacementChar) - 1];
-                    replacementChar = romanNumerals.Values[romanNumerals.IndexOfValue(replacementChar) + 1];
-                    charMultiplier = 1;
+                    if (divisor + (divisor - remainder) > number)
+                    {
+                        Console.WriteLine("RMO4 (" + romanNumerals.Keys[romanNumerals.IndexOfValue(replacementChar)] +
+                                          ") - Divisor-Remainder=" + (divisor - remainder));
+                        numeral = replacementChar;
+                        replacementChar = new Kata().GetRomanNumeral(remainder);
+                        charMultiplier = 1;
+                    }
+                    else
+                    {
+                        numeral = romanNumerals.Values[romanNumerals.IndexOfValue(replacementChar) - 1];
+                        replacementChar = romanNumerals.Values[romanNumerals.IndexOfValue(replacementChar) + 1];
+                        charMultiplier = 1;
+                    }
                 }
                 else
                 {
@@ -88,6 +101,11 @@ namespace RomanNumeralsKata
             }
 
             return numeral;
+        }
+
+        private static int DetermineCharMultiplier(int number, int divisor, ref int remainder)
+        {
+            return divisor > 0 ? Math.DivRem(number, divisor, out remainder) : 1;
         }
 
         private static bool IsBetween1And3(int remainder)
