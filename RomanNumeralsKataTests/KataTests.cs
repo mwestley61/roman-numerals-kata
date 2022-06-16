@@ -104,6 +104,14 @@ namespace RomanNumeralsKataTests
         }
 
         [Fact]
+        public void returns_X_plus_V()
+        {
+            var numeral = _kata.GetRomanNumeral(15);
+
+            Assert.Equal("XV", numeral);
+        }
+
+        [Fact]
         public void returns_L_minus_X()
         {
             var numeral = _kata.GetRomanNumeral(40);
@@ -130,6 +138,14 @@ namespace RomanNumeralsKataTests
 
             Assert.StartsWith("L", numeral);
             Assert.EndsWith(new string('I', numberOfIs), numeral);
+        }
+
+        [Fact]
+        public void returns_L_plus_V()
+        {
+            var numeral = _kata.GetRomanNumeral(55);
+
+            Assert.Equal("LV", numeral);
         }
 
         [Fact]
@@ -166,6 +182,14 @@ namespace RomanNumeralsKataTests
         }
 
         [Fact]
+        public void returns_C_plus_V()
+        {
+            var numeral = _kata.GetRomanNumeral(105);
+
+            Assert.Equal("CV", numeral);
+        }
+
+        [Fact]
         public void returns_D_minus_C()
         {
             var numeral = _kata.GetRomanNumeral(400);
@@ -192,6 +216,14 @@ namespace RomanNumeralsKataTests
 
             Assert.StartsWith("D", numeral);
             Assert.EndsWith(new string('I', numberOfIs), numeral);
+        }
+
+        [Fact]
+        public void returns_D_plus_V()
+        {
+            var numeral = _kata.GetRomanNumeral(505);
+
+            Assert.Equal("DV", numeral);
         }
 
         [Fact]
@@ -226,6 +258,15 @@ namespace RomanNumeralsKataTests
             Assert.StartsWith("M", numeral);
             Assert.EndsWith(new string('I', numberOfIs), numeral);
         }
+
+        [Fact]
+        public void returns_M_plus_V()
+        {
+            var numeral = _kata.GetRomanNumeral(1005);
+
+            Assert.Equal("MV", numeral);
+        }
+
     }
     public class Converter : TextWriter
         {   

@@ -45,26 +45,28 @@ namespace RomanNumeralsKata
         {
             string numeral = "";
 
-            if (charMultiplier > 3)
+            if (IsBetween1And3(remainder))
             {
                 numeral = replacementChar;
-                replacementChar = romanNumerals.Values[romanNumerals.IndexOfValue(replacementChar) + 1];
-                charMultiplier = 1;
-            }
-
-            if (remainder > 3)
-            {
-                numeral = romanNumerals.Values[romanNumerals.IndexOfValue(replacementChar) - 1];
-                replacementChar = romanNumerals.Values[romanNumerals.IndexOfValue(replacementChar) + 1];
-                charMultiplier = 1;
+                replacementChar = "I";
+                charMultiplier = remainder;
             }
             else
             {
-                if (remainder > 0)
+                if (IsMultipleOf4(remainder))
                 {
-                    numeral = replacementChar;
-                    replacementChar = "I";
-                    charMultiplier = remainder;
+                    numeral = romanNumerals.Values[romanNumerals.IndexOfValue(replacementChar) - 1];
+                    replacementChar = romanNumerals.Values[romanNumerals.IndexOfValue(replacementChar) + 1];
+                    charMultiplier = 1;
+                }
+                else
+                {
+                    if (remainder == 5)
+                    {
+                        numeral = replacementChar;
+                        replacementChar = "V";
+                        charMultiplier = 1;
+                    }
                 }
             }
 
@@ -73,6 +75,13 @@ namespace RomanNumeralsKata
 
         private static string NumeralAffectedByCharMultiplier(int charMultiplier, string replacementChar, string numeral)
         {
+            if (charMultiplier > 3)
+            {
+                numeral = replacementChar;
+                replacementChar = romanNumerals.Values[romanNumerals.IndexOfValue(replacementChar) + 1];
+                charMultiplier = 1;
+            }
+
             for (int i = 0; i < charMultiplier; i++)
             {
                 numeral += replacementChar;
@@ -80,5 +89,23 @@ namespace RomanNumeralsKata
 
             return numeral;
         }
+
+        private static bool IsBetween1And3(int remainder)
+        {
+            if (remainder > 0 && remainder < 4)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        private static bool IsMultipleOf4(int remainder)
+        {
+            int leftover = 0;
+            Math.DivRem(remainder, 4, out leftover);
+            if (remainder > 0 && leftover == 0) return true;
+            return false;
+        }
+
     }
 }
