@@ -120,13 +120,98 @@ namespace RomanNumeralsKataTests
         }
 
         [Fact]
+        public void returns_X_plus_VI()
+        {
+            var numeral = _kata.GetRomanNumeral(16);
+
+            Assert.Equal("XVI", numeral);
+        }
+
+        [Fact]
+        public void returns_X_plus_VII()
+        {
+            var numeral = _kata.GetRomanNumeral(17);
+
+            Assert.Equal("XVII", numeral);
+        }
+
+        [Fact]
+        public void returns_X_plus_VIII()
+        {
+            var numeral = _kata.GetRomanNumeral(18);
+
+            Assert.Equal("XVIII", numeral);
+        }
+
+        [Fact]
+        public void returns_X_plus_IX()
+        {
+            var numeral = _kata.GetRomanNumeral(19);
+
+            Assert.Equal("XIX", numeral);
+        }
+
+        [Theory]
+        [InlineData(21)]
+        [InlineData(22)]
+        [InlineData(23)]
+        public void returns_XX_plus_one_to_three_letter_Is(int number)
+        {
+            var numeral = _kata.GetRomanNumeral(number);
+            var numberOfIs = number - 20;
+
+            Assert.StartsWith("XX", numeral);
+            Assert.EndsWith(new string('I', numberOfIs), numeral);
+        }
+
+        [Fact]
+        public void returns_XX_plus_IV()
+        {
+            var numeral = _kata.GetRomanNumeral(24);
+
+            Assert.Equal("XXIV", numeral);
+        }
+
+        [Fact]
+        public void returns_XX_plus_V()
+        {
+            var numeral = _kata.GetRomanNumeral(25);
+
+            Assert.Equal("XXV", numeral);
+        }
+
+        [Fact]
+        public void returns_XX_plus_IX()
+        {
+            var numeral = _kata.GetRomanNumeral(29);
+
+            Assert.Equal("XXIX", numeral);
+        }
+
+        [Fact]
+        public void returns_XXX_plus_IX()
+        {
+            var numeral = _kata.GetRomanNumeral(39);
+
+            Assert.Equal("XXXIX", numeral);
+        }
+
+        [Fact]
         public void returns_L_minus_X()
         {
             var numeral = _kata.GetRomanNumeral(40);
 
             Assert.Equal("XL", numeral);
         }
-        
+
+        [Fact]
+        public void returns_L_minus_X_plus_IX()
+        {
+            var numeral = _kata.GetRomanNumeral(49);
+
+            Assert.Equal("XLIX", numeral);
+        }
+
         [Fact]
         public void returns_L()
         {
@@ -165,11 +250,27 @@ namespace RomanNumeralsKataTests
         }
 
         [Fact]
+        public void returns_L_plus_XXXIX()
+        {
+            var numeral = _kata.GetRomanNumeral(89);
+
+            Assert.Equal("LXXXIX", numeral);
+        }
+
+        [Fact]
         public void returns_C_minus_X()
         {
             var numeral = _kata.GetRomanNumeral(90);
 
             Assert.Equal("XC", numeral);
+        }
+
+        [Fact]
+        public void returns_C_minus_X_plus_IX()
+        {
+            var numeral = _kata.GetRomanNumeral(99);
+
+            Assert.Equal("XCIX", numeral);
         }
 
         [Theory]
@@ -211,6 +312,14 @@ namespace RomanNumeralsKataTests
             var numeral = _kata.GetRomanNumeral(105);
 
             Assert.Equal("CV", numeral);
+        }
+
+        [Fact]
+        public void returns_C_plus_IX()
+        {
+            var numeral = _kata.GetRomanNumeral(109);
+
+            Assert.Equal("CIX", numeral);
         }
 
         [Fact]

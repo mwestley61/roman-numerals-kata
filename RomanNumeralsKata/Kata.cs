@@ -49,36 +49,44 @@ namespace RomanNumeralsKata
 
             if (IsBetween1And3(remainder))
             {
-                numeral = replacementChar;
+                numeral = NumeralAffectedByCharMultiplier(charMultiplier, replacementChar, numeral);
                 replacementChar = "I";
                 charMultiplier = remainder;
             }
             else
             {
-                if (IsMultipleOf4(remainder))
+                if (IsBetween5And9(remainder) || remainder == 39)
                 {
-                    if (divisor + (divisor - remainder) > number)
-                    {
-                        Console.WriteLine("RMO4 (" + romanNumerals.Keys[romanNumerals.IndexOfValue(replacementChar)] +
-                                          ") - Divisor-Remainder=" + (divisor - remainder));
-                        numeral = replacementChar;
-                        replacementChar = new Kata().GetRomanNumeral(remainder);
-                        charMultiplier = 1;
-                    }
-                    else
-                    {
-                        numeral = romanNumerals.Values[romanNumerals.IndexOfValue(replacementChar) - 1];
-                        replacementChar = romanNumerals.Values[romanNumerals.IndexOfValue(replacementChar) + 1];
-                        charMultiplier = 1;
-                    }
+                    numeral = NumeralAffectedByCharMultiplier(charMultiplier, replacementChar, numeral);
+                    replacementChar = new Kata().GetRomanNumeral(remainder);
+                    charMultiplier = 1;
                 }
                 else
                 {
-                    if (remainder == 5)
+                    if (IsMultipleOf4(remainder))
                     {
-                        numeral = replacementChar;
-                        replacementChar = "V";
-                        charMultiplier = 1;
+                        if (divisor*charMultiplier + (divisor - remainder) > number)
+                        {
+                            numeral = NumeralAffectedByCharMultiplier(charMultiplier, replacementChar, numeral);
+                            replacementChar = new Kata().GetRomanNumeral(remainder);
+                            charMultiplier = 1;
+                        }
+                        else
+                        {
+                            numeral = romanNumerals.Values[romanNumerals.IndexOfValue(replacementChar) - 1];
+                            replacementChar = romanNumerals.Values[romanNumerals.IndexOfValue(replacementChar) + 1];
+                            charMultiplier = 1;
+                        }
+                    }
+                    else
+                    {
+                        if (remainder == 49)
+                        {
+                            numeral = romanNumerals.Values[romanNumerals.IndexOfValue(replacementChar) - 1];
+                            numeral += romanNumerals.Values[romanNumerals.IndexOfValue(replacementChar) + 1];
+                            replacementChar = new Kata().GetRomanNumeral(remainder - 40);
+                            charMultiplier = 1;
+                        }
                     }
                 }
             }
@@ -111,6 +119,15 @@ namespace RomanNumeralsKata
         private static bool IsBetween1And3(int remainder)
         {
             if (remainder > 0 && remainder < 4)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        private static bool IsBetween5And9(int remainder)
+        {
+            if (remainder > 4 && remainder < 10)
             {
                 return true;
             }
